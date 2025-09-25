@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { LogOut, Settings, FileText, Calendar, Users, Image, BookOpen, Newspaper, Home } from "lucide-react";
+import { LogOut, Settings, FileText, Calendar, Users, Image, BookOpen, Newspaper, Chrome as Home } from "lucide-react";
 import { Crown } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -89,8 +89,11 @@ const AdminPage = () => {
                   Ir para o Site
                 </a>
               </Button>
-              <Button variant="outline" onClick={handleLogout}>
-                <Home className="h-4 w-4 mr-2" />
+              <Button variant="outline" asChild>
+                <a href="/" target="_blank">
+                  <Home className="h-4 w-4 mr-2" />
+                  Ir para o Site
+                </a>
                 <LogOut className="h-4 w-4 mr-2" />
                 Sair
               </Button>

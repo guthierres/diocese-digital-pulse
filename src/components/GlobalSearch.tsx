@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Search, Loader2 } from "lucide-react";
+import { Search, Loader as Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Command, CommandEmpty, CommandGroup, CommandItem, CommandList, CommandInput } from "@/components/ui/command";
@@ -62,6 +62,7 @@ const GlobalSearch = ({ className, placeholder = "Buscar..." }: GlobalSearchProp
             placeholder={placeholder}
             value={searchTerm}
             onValueChange={setSearchTerm}
+            autoFocus
             autoFocus
           />
           <CommandList>

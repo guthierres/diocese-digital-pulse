@@ -13,6 +13,7 @@ import DiretorioClero from "./pages/DiretorioClero";
 import DiretorioParoquias from "./pages/DiretorioParoquias";
 import Institucional from "./pages/Institucional";
 import Bispo from "./pages/Bispo";
+import GovernoDiocese from "./pages/GovernoDiocese";
 import Admin from "./pages/Admin";
 import AdminLogin from "./pages/AdminLogin";
 
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/noticias/:slug" element={<Noticias />} />
           <Route path="/eventos" element={<Eventos />} />
           <Route path="/eventos/:slug" element={<Eventos />} />
+          <Route path="/governo" element={<GovernoDiocese />} />
           <Route path="/mensagens-do-pastor" element={<MensagensPastor />} />
           <Route path="/mensagens-do-pastor/:slug" element={<MensagensPastor />} />
           <Route path="/galeria" element={<Galeria />} />

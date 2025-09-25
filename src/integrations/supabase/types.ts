@@ -150,7 +150,9 @@ export type Database = {
           bio?: string | null
           created_at?: string
           email?: string | null
+          government_order?: number | null
           id?: string
+          is_government?: boolean | null
           motto?: string | null
           name?: string
           ordination_date?: string | null

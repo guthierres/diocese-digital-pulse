@@ -13,7 +13,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import { Plus, Edit, Trash2, Eye, Calendar, User, Phone, Mail } from "lucide-react";
+import { Plus, CreditCard as Edit, Trash2, Eye, Calendar, User, Phone, Mail } from "lucide-react";
 
 interface ClergyMember {
   id: string;
@@ -56,7 +56,9 @@ const AdminClergy = () => {
     photo_url: '',
     phone: '',
     email: '',
-    bio: ''
+    bio: '',
+    is_government: false,
+    government_order: ''
   });
   const { toast } = useToast();
 
@@ -131,7 +133,9 @@ const AdminClergy = () => {
         photo_url: formData.photo_url || null,
         phone: formData.phone || null,
         email: formData.email || null,
-        bio: formData.bio || null
+        bio: formData.bio || null,
+        is_government: formData.is_government,
+        government_order: formData.government_order ? parseInt(formData.government_order) : null
       };
 
       if (editingMember) {
