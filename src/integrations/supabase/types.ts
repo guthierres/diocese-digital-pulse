@@ -14,7 +14,387 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      articles: {
+        Row: {
+          author: string
+          content: string
+          created_at: string
+          excerpt: string | null
+          featured_image_url: string | null
+          id: string
+          is_featured: boolean | null
+          published_at: string | null
+          slug: string
+          tags: string[] | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          author?: string
+          content: string
+          created_at?: string
+          excerpt?: string | null
+          featured_image_url?: string | null
+          id?: string
+          is_featured?: boolean | null
+          published_at?: string | null
+          slug: string
+          tags?: string[] | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          author?: string
+          content?: string
+          created_at?: string
+          excerpt?: string | null
+          featured_image_url?: string | null
+          id?: string
+          is_featured?: boolean | null
+          published_at?: string | null
+          slug?: string
+          tags?: string[] | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      clergy: {
+        Row: {
+          bio: string | null
+          created_at: string
+          email: string | null
+          id: string
+          motto: string | null
+          name: string
+          ordination_date: string | null
+          parish_id: string | null
+          phone: string | null
+          photo_url: string | null
+          position: string
+          provisioned_since: string | null
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          bio?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          motto?: string | null
+          name: string
+          ordination_date?: string | null
+          parish_id?: string | null
+          phone?: string | null
+          photo_url?: string | null
+          position: string
+          provisioned_since?: string | null
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          bio?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          motto?: string | null
+          name?: string
+          ordination_date?: string | null
+          parish_id?: string | null
+          phone?: string | null
+          photo_url?: string | null
+          position?: string
+          provisioned_since?: string | null
+          slug?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_clergy_parish"
+            columns: ["parish_id"]
+            isOneToOne: false
+            referencedRelation: "parishes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      events: {
+        Row: {
+          created_at: string
+          description: string
+          end_date: string | null
+          event_date: string
+          featured_image_url: string | null
+          id: string
+          is_featured: boolean | null
+          location: string
+          slug: string
+          status: Database["public"]["Enums"]["event_status"] | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          end_date?: string | null
+          event_date: string
+          featured_image_url?: string | null
+          id?: string
+          is_featured?: boolean | null
+          location: string
+          slug: string
+          status?: Database["public"]["Enums"]["event_status"] | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          end_date?: string | null
+          event_date?: string
+          featured_image_url?: string | null
+          id?: string
+          is_featured?: boolean | null
+          location?: string
+          slug?: string
+          status?: Database["public"]["Enums"]["event_status"] | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      journals: {
+        Row: {
+          cover_image_url: string | null
+          created_at: string
+          description: string | null
+          edition_number: number | null
+          id: string
+          pdf_url: string
+          publication_date: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          cover_image_url?: string | null
+          created_at?: string
+          description?: string | null
+          edition_number?: number | null
+          id?: string
+          pdf_url: string
+          publication_date: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          cover_image_url?: string | null
+          created_at?: string
+          description?: string | null
+          edition_number?: number | null
+          id?: string
+          pdf_url?: string
+          publication_date?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      parishes: {
+        Row: {
+          address: string
+          created_at: string
+          creation_date: string | null
+          description: string | null
+          email: string | null
+          id: string
+          image_url: string | null
+          mass_schedule: string | null
+          name: string
+          parish_priest_id: string | null
+          phone: string | null
+          service_hours: string | null
+          slug: string
+          updated_at: string
+          website: string | null
+        }
+        Insert: {
+          address: string
+          created_at?: string
+          creation_date?: string | null
+          description?: string | null
+          email?: string | null
+          id?: string
+          image_url?: string | null
+          mass_schedule?: string | null
+          name: string
+          parish_priest_id?: string | null
+          phone?: string | null
+          service_hours?: string | null
+          slug: string
+          updated_at?: string
+          website?: string | null
+        }
+        Update: {
+          address?: string
+          created_at?: string
+          creation_date?: string | null
+          description?: string | null
+          email?: string | null
+          id?: string
+          image_url?: string | null
+          mass_schedule?: string | null
+          name?: string
+          parish_priest_id?: string | null
+          phone?: string | null
+          service_hours?: string | null
+          slug?: string
+          updated_at?: string
+          website?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_parish_priest"
+            columns: ["parish_priest_id"]
+            isOneToOne: false
+            referencedRelation: "clergy"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pastor_messages: {
+        Row: {
+          content: string | null
+          content_type: Database["public"]["Enums"]["content_type"] | null
+          created_at: string
+          id: string
+          is_featured: boolean | null
+          media_url: string | null
+          published_at: string | null
+          slug: string
+          thumbnail_url: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          content?: string | null
+          content_type?: Database["public"]["Enums"]["content_type"] | null
+          created_at?: string
+          id?: string
+          is_featured?: boolean | null
+          media_url?: string | null
+          published_at?: string | null
+          slug: string
+          thumbnail_url?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          content?: string | null
+          content_type?: Database["public"]["Enums"]["content_type"] | null
+          created_at?: string
+          id?: string
+          is_featured?: boolean | null
+          media_url?: string | null
+          published_at?: string | null
+          slug?: string
+          thumbnail_url?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      photos: {
+        Row: {
+          album_name: string | null
+          created_at: string
+          description: string | null
+          event_id: string | null
+          id: string
+          image_url: string
+          photographer: string | null
+          taken_date: string | null
+          thumbnail_url: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          album_name?: string | null
+          created_at?: string
+          description?: string | null
+          event_id?: string | null
+          id?: string
+          image_url: string
+          photographer?: string | null
+          taken_date?: string | null
+          thumbnail_url?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          album_name?: string | null
+          created_at?: string
+          description?: string | null
+          event_id?: string | null
+          id?: string
+          image_url?: string
+          photographer?: string | null
+          taken_date?: string | null
+          thumbnail_url?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_photo_event"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      site_settings: {
+        Row: {
+          created_at: string
+          email_contact: string | null
+          facebook_url: string | null
+          id: string
+          instagram_url: string | null
+          logo_url: string | null
+          meta_description: string | null
+          site_name: string
+          site_title: string
+          updated_at: string
+          youtube_url: string | null
+        }
+        Insert: {
+          created_at?: string
+          email_contact?: string | null
+          facebook_url?: string | null
+          id?: string
+          instagram_url?: string | null
+          logo_url?: string | null
+          meta_description?: string | null
+          site_name?: string
+          site_title?: string
+          updated_at?: string
+          youtube_url?: string | null
+        }
+        Update: {
+          created_at?: string
+          email_contact?: string | null
+          facebook_url?: string | null
+          id?: string
+          instagram_url?: string | null
+          logo_url?: string | null
+          meta_description?: string | null
+          site_name?: string
+          site_title?: string
+          updated_at?: string
+          youtube_url?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +403,8 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      content_type: "texto" | "video" | "audio"
+      event_status: "confirmado" | "cancelado" | "adiado"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +531,9 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      content_type: ["texto", "video", "audio"],
+      event_status: ["confirmado", "cancelado", "adiado"],
+    },
   },
 } as const
