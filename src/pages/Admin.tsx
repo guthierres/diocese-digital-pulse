@@ -89,11 +89,7 @@ const AdminPage = () => {
                   Ir para o Site
                 </a>
               </Button>
-              <Button variant="outline" asChild>
-                <a href="/" target="_blank">
-                  <Home className="h-4 w-4 mr-2" />
-                  Ir para o Site
-                </a>
+              <Button variant="outline" onClick={handleLogout}>
                 <LogOut className="h-4 w-4 mr-2" />
                 Sair
               </Button>
