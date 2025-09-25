@@ -72,9 +72,6 @@ const Header = () => {
               <h1 className="text-xl font-bold text-primary">
                 {siteSettings?.site_name || "Diocese de São Miguel Paulista"}
               </h1>
-              <p className="text-xs text-muted-foreground">
-                {siteSettings?.site_title || "Defendei-nos no combate"}
-              </p>
             </div>
           </div>
 
