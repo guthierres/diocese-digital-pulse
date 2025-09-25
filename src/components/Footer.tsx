@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Facebook, Instagram, Youtube, Mail, Phone, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -45,34 +46,34 @@ const Footer = () => {
               <h4 className="text-lg font-semibold mb-6">Links Rápidos</h4>
               <ul className="space-y-3">
                 <li>
-                  <a href="/sobre" className="text-primary-foreground/80 hover:text-accent transition-smooth">
+                  <Link to="/mensagens-do-pastor" className="text-primary-foreground/80 hover:text-accent transition-smooth">
+                    Mensagens do Pastor
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/jornal" className="text-primary-foreground/80 hover:text-accent transition-smooth">
+                    Jornal da Diocese
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/galeria" className="text-primary-foreground/80 hover:text-accent transition-smooth">
+                    Galeria de Fotos
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/sobre" className="text-primary-foreground/80 hover:text-accent transition-smooth">
                     Sobre a Diocese
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/paroquias" className="text-primary-foreground/80 hover:text-accent transition-smooth">
-                    Paróquias
-                  </a>
+                  <Link to="/missao" className="text-primary-foreground/80 hover:text-accent transition-smooth">
+                    Missão e Visão
+                  </Link>
                 </li>
                 <li>
-                  <a href="/clero" className="text-primary-foreground/80 hover:text-accent transition-smooth">
-                    Clero
-                  </a>
-                </li>
-                <li>
-                  <a href="/eventos" className="text-primary-foreground/80 hover:text-accent transition-smooth">
-                    Eventos
-                  </a>
-                </li>
-                <li>
-                  <a href="/doacoes" className="text-primary-foreground/80 hover:text-accent transition-smooth">
-                    Doações
-                  </a>
-                </li>
-                <li>
-                  <a href="/contato" className="text-primary-foreground/80 hover:text-accent transition-smooth">
-                    Contato
-                  </a>
+                  <Link to="/doacoes" className="text-primary-foreground/80 hover:text-accent transition-smooth">
+                    Como Contribuir
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -111,12 +112,12 @@ const Footer = () => {
               © {currentYear} Diocese de São Miguel Paulista. Todos os direitos reservados.
             </p>
             <div className="flex space-x-6 text-sm">
-              <a href="/politica-privacidade" className="text-primary-foreground/80 hover:text-accent transition-smooth">
+              <Link to="/politica-privacidade" className="text-primary-foreground/80 hover:text-accent transition-smooth">
                 Política de Privacidade
-              </a>
-              <a href="/termos" className="text-primary-foreground/80 hover:text-accent transition-smooth">
+              </Link>
+              <Link to="/termos" className="text-primary-foreground/80 hover:text-accent transition-smooth">
                 Termos de Uso
-              </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -1,12 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Calendar, User } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const NewsSection = () => {
   const newsItems = [
     {
       id: 1,
       title: "Celebração do Dia Mundial da Juventude na Diocese",
+      slug: "celebracao-dia-mundial-juventude-diocese",
       excerpt: "Jovens de toda a região se reuniram para celebrar a fé e compartilhar experiências de evangelização.",
       author: "Pe. João Silva",
       date: "15/12/2024",
@@ -16,6 +18,7 @@ const NewsSection = () => {
     {
       id: 2,
       title: "Campanha do Agasalho 2024: Aquecendo Corações",
+      slug: "campanha-agasalho-2024-aquecendo-coracoes",
       excerpt: "A tradicional campanha de inverno arrecadou mais de 10 mil peças para famílias em situação de vulnerabilidade.",
       author: "Irmã Maria Santos",
       date: "12/12/2024",
@@ -25,6 +28,7 @@ const NewsSection = () => {
     {
       id: 3,
       title: "Peregrinação à Aparecida: Inscrições Abertas",
+      slug: "peregrinacao-aparecida-inscricoes-abertas",
       excerpt: "Diocese organiza peregrinação especial ao Santuário Nacional com programação litúrgica completa.",
       author: "Coordenação Diocesana",
       date: "10/12/2024",
@@ -81,8 +85,10 @@ const NewsSection = () => {
                 </div>
               </CardContent>
               <CardFooter className="px-6 pb-6">
-                <Button variant="ghost" className="w-full">
-                  Ler Mais
+                <Button variant="ghost" className="w-full" asChild>
+                  <Link to={`/noticias/${item.slug}`}>
+                    Ler Mais
+                  </Link>
                 </Button>
               </CardFooter>
             </Card>
@@ -90,8 +96,10 @@ const NewsSection = () => {
         </div>
 
         <div className="text-center">
-          <Button variant="default" size="lg">
-            Ver Todas as Notícias
+          <Button variant="default" size="lg" asChild>
+            <Link to="/noticias">
+              Ver Todas as Notícias
+            </Link>
           </Button>
         </div>
       </div>

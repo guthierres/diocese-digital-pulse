@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { supabase } from "@/integrations/supabase/client";
+import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import GlobalSearch from "@/components/GlobalSearch";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,28 +14,35 @@ const Header = () => {
     { name: "Início", href: "/" },
     { name: "Notícias", href: "/noticias" },
     { name: "Eventos", href: "/eventos" },
-    { name: "Mensagens do Pastor", href: "/mensagens" },
-    { name: "Jornal da Diocese", href: "/jornal" },
-    { name: "Galeria", href: "/galeria" },
+    { name: "Bispo", href: "/bispo" },
     {
       name: "Diretório",
       href: "#",
       submenu: [
-        { name: "Clero", href: "/clero" },
-        { name: "Paróquias", href: "/paroquias" },
-      ],
-    },
-    {
-      name: "Institucional",
-      href: "#",
-      submenu: [
-        { name: "Sobre", href: "/sobre" },
-        { name: "Missão", href: "/missao" },
-        { name: "Contato", href: "/contato" },
-        { name: "Doações", href: "/doacoes" },
+        { name: "Clero", href: "/diretorio/clero" },
+        { name: "Paróquias", href: "/diretorio/paroquias" },
       ],
     },
   ];
+
+  const [siteLogoUrl, setSiteLogoUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchSiteSettings = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('site_settings')
+          .select('logo_url')
+          .single();
+        if (error) throw error;
+        setSiteLogoUrl(data?.logo_url || null);
+      } catch (error) {
+        console.error("Erro ao carregar configurações do site:", error);
+      }
+    };
+
+    fetchSiteSettings();
+  }, []);
 
   return (
     <header className="bg-background shadow-medium sticky top-0 z-50">
@@ -40,9 +50,15 @@ const Header = () => {
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <div className="flex items-center">
-            <div className="h-12 w-12 bg-primary rounded-full flex items-center justify-center mr-3">
-              <span className="text-primary-foreground font-bold text-lg">D</span>
-            </div>
+            <Link to="/">
+              {siteLogoUrl ? (
+                <img src={siteLogoUrl} alt="Logo da Diocese" className="h-12 w-12 object-contain mr-3" />
+              ) : (
+                <div className="h-12 w-12 bg-primary rounded-full flex items-center justify-center mr-3">
+                  <span className="text-primary-foreground font-bold text-lg">D</span>
+                </div>
+              )}
+            </Link>
             <div>
               <h1 className="text-xl font-bold text-primary">Diocese de São Miguel Paulista</h1>
               <p className="text-xs text-muted-foreground">Arquidiocese de São Paulo</p>
@@ -51,6 +67,9 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
+            {/* Search Field - Desktop */}
+            <GlobalSearch className="w-64" placeholder="Buscar no site..." />
+            
             {navigationItems.map((item) => (
               <div key={item.name} className="relative">
                 {item.submenu ? (
@@ -87,8 +106,10 @@ const Header = () => {
                 )}
               </div>
             ))}
-            <Button variant="accent" size="sm">
-              Contato
+            <Button variant="accent" size="sm" asChild>
+              <a href="/contato">
+                Contato
+              </a>
             </Button>
           </nav>
 
@@ -108,6 +129,11 @@ const Header = () => {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <nav className="lg:hidden pb-4">
+            {/* Search Field - Mobile */}
+            <div className="mb-4">
+              <GlobalSearch className="w-full" placeholder="Buscar no site..." />
+            </div>
+            
             <div className="space-y-1">
               {navigationItems.map((item) => (
                 <div key={item.name}>
@@ -139,8 +165,10 @@ const Header = () => {
                 </div>
               ))}
               <div className="pt-2">
-                <Button variant="accent" size="sm" className="w-full">
-                  Contato
+                <Button variant="accent" size="sm" className="w-full" asChild>
+                  <a href="/contato">
+                    Contato
+                  </a>
                 </Button>
               </div>
             </div>

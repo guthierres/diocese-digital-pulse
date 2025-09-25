@@ -1,12 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Calendar, Clock, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const EventsSection = () => {
   const events = [
     {
       id: 1,
       title: "Missa da Sagrada Família",
+      slug: "missa-sagrada-familia",
       date: "29/12/2024",
       time: "19:00",
       location: "Catedral São Miguel Arcanjo",
@@ -16,6 +18,7 @@ const EventsSection = () => {
     {
       id: 2,
       title: "Adoração ao Santíssimo Sacramento",
+      slug: "adoracao-santissimo-sacramento",
       date: "31/12/2024",
       time: "23:00",
       location: "Paróquia São José",
@@ -25,6 +28,7 @@ const EventsSection = () => {
     {
       id: 3,
       title: "Encontro de Jovens - Projeto Vida",
+      slug: "encontro-jovens-projeto-vida",
       date: "05/01/2025",
       time: "14:00",
       location: "Centro Pastoral Diocesano",
@@ -34,6 +38,7 @@ const EventsSection = () => {
     {
       id: 4,
       title: "Curso de Noivos",
+      slug: "curso-noivos",
       date: "12/01/2025",
       time: "09:00",
       location: "Paróquia Santa Teresinha",
@@ -89,8 +94,10 @@ const EventsSection = () => {
                 <p className="text-muted-foreground mb-4">
                   {event.description}
                 </p>
-                <Button variant="outline" size="sm">
-                  Mais Informações
+                <Button variant="outline" size="sm" asChild>
+                  <Link to={`/eventos/${event.slug}`}>
+                    Mais Informações
+                  </Link>
                 </Button>
               </CardContent>
             </Card>
@@ -98,8 +105,10 @@ const EventsSection = () => {
         </div>
 
         <div className="text-center">
-          <Button variant="default" size="lg">
-            Ver Agenda Completa
+          <Button variant="default" size="lg" asChild>
+            <Link to="/eventos">
+              Ver Agenda Completa
+            </Link>
           </Button>
         </div>
       </div>

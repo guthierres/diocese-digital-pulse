@@ -6,7 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import { Download, Calendar, Eye } from "lucide-react";
+import { Download, Calendar, Eye, ArrowLeft } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface Journal {
   id: string;
@@ -77,6 +78,15 @@ const JornalPage = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <main className="container mx-auto px-4 py-8">
+        <div className="mb-6">
+          <Link to="/">
+            <Button variant="outline" className="mb-4">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Voltar ao Início
+            </Button>
+          </Link>
+        </div>
+
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-primary mb-4">Jornal da Diocese</h1>
           <p className="text-muted-foreground">

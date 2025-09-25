@@ -2,13 +2,15 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import NewsGallery from "@/components/NewsGallery";
 import { supabase } from "@/integrations/supabase/client";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import { Calendar, User, ArrowLeft, Share2 } from "lucide-react";
+import { Calendar, User, ArrowLeft, Share2, Facebook, MessageCircle, Mail, Copy, ExternalLink } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 interface Article {
   id: string;
@@ -20,6 +22,8 @@ interface Article {
   featured_image_url: string;
   tags: string[];
   published_at: string;
+  gallery_images?: string[];
+  gallery_images?: string[];
 }
 
 const NoticiasPage = () => {
@@ -29,6 +33,7 @@ const NoticiasPage = () => {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const articlesPerPage = 9;
+  const { toast } = useToast();
 
   useEffect(() => {
     if (slug) {
@@ -88,6 +93,42 @@ const NoticiasPage = () => {
     }
   };
 
+  const handleShareFacebook = () => {
+    const url = encodeURIComponent(window.location.href);
+    const text = encodeURIComponent(currentArticle?.title || '');
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`, '_blank');
+  };
+
+  const handleShareWhatsApp = () => {
+    const url = encodeURIComponent(window.location.href);
+    const text = encodeURIComponent(`${currentArticle?.title} - ${currentArticle?.excerpt}`);
+    window.open(`https://wa.me/?text=${text}%20${url}`, '_blank');
+  };
+
+  const handleShareTwitter = () => {
+    const url = encodeURIComponent(window.location.href);
+    const text = encodeURIComponent(currentArticle?.title || '');
+    window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+  };
+
+  const handleShareEmail = () => {
+    const subject = encodeURIComponent(currentArticle?.title || '');
+    const body = encodeURIComponent(`${currentArticle?.excerpt}\n\nLeia mais: ${window.location.href}`);
+    window.open(`mailto:?subject=${subject}&body=${body}`);
+  };
+
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      toast({
+        title: "Link copiado!",
+        description: "O link foi copiado para a área de transferência.",
+      });
+    } catch (error) {
+      console.error('Erro ao copiar link:', error);
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-background">
@@ -133,9 +174,29 @@ const NoticiasPage = () => {
                       {format(new Date(currentArticle.published_at), "dd/MM/yyyy 'às' HH:mm", { locale: ptBR })}
                     </span>
                   </div>
-                  <Button variant="outline" size="sm" onClick={handleShare}>
-                    <Share2 className="h-4 w-4 mr-2" />
-                    Compartilhar
+                </div>
+
+                {/* Botões de Compartilhamento */}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  <Button variant="outline" size="sm" onClick={handleShareFacebook}>
+                    <Facebook className="h-4 w-4 mr-2" />
+                    Facebook
+                  </Button>
+                  <Button variant="outline" size="sm" onClick={handleShareWhatsApp}>
+                    <MessageCircle className="h-4 w-4 mr-2" />
+                    WhatsApp
+                  </Button>
+                  <Button variant="outline" size="sm" onClick={handleShareTwitter}>
+                    <ExternalLink className="h-4 w-4 mr-2" />
+                    X (Twitter)
+                  </Button>
+                  <Button variant="outline" size="sm" onClick={handleShareEmail}>
+                    <Mail className="h-4 w-4 mr-2" />
+                    E-mail
+                  </Button>
+                  <Button variant="outline" size="sm" onClick={handleCopyLink}>
+                    <Copy className="h-4 w-4 mr-2" />
+                    Copiar Link
                   </Button>
                 </div>
 
@@ -157,9 +218,17 @@ const NoticiasPage = () => {
               </header>
 
               <div 
-                className="content"
+                className="content text-justify leading-relaxed"
                 dangerouslySetInnerHTML={{ __html: currentArticle.content }}
               />
+              
+              {/* Galeria de Imagens */}
+              {currentArticle.gallery_images && currentArticle.gallery_images.length > 0 && (
+                <NewsGallery 
+                  images={currentArticle.gallery_images} 
+                  title={currentArticle.title} 
+                />
+              )}
             </article>
           </div>
         </main>

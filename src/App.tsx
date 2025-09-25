@@ -13,6 +13,7 @@ import Galeria from "./pages/Galeria";
 import DiretorioClero from "./pages/DiretorioClero";
 import DiretorioParoquias from "./pages/DiretorioParoquias";
 import Institucional from "./pages/Institucional";
+import Bispo from "./pages/Bispo";
 import Admin from "./pages/Admin";
 import AdminLogin from "./pages/AdminLogin";
 
@@ -38,6 +39,12 @@ const App = () => (
           <Route path="/diretorio/clero/:slug" element={<DiretorioClero />} />
           <Route path="/diretorio/paroquias" element={<DiretorioParoquias />} />
           <Route path="/diretorio/paroquias/:slug" element={<DiretorioParoquias />} />
+          <Route path="/bispo" element={<Bispo />} />
+          {/* Redirecionamentos para páginas institucionais */}
+          <Route path="/sobre" element={<Institucional />} />
+          <Route path="/missao" element={<Institucional />} />
+          <Route path="/contato" element={<Institucional />} />
+          <Route path="/doacoes" element={<Institucional />} />
           <Route path="/institucional/:page" element={<Institucional />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/login" element={<AdminLogin />} />

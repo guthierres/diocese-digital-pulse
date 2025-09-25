@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,9 +7,13 @@ import { Mail, MapPin, Phone, Heart, Target, Users, Shield, FileText, CreditCard
 
 const InstitucionalPage = () => {
   const { page } = useParams();
+  const location = useLocation();
+  
+  // Determinar a página baseada na URL
+  const currentPage = page || location.pathname.replace('/', '');
 
   const renderContent = () => {
-    switch (page) {
+    switch (currentPage) {
       case 'sobre':
         return (
           <div className="max-w-4xl mx-auto">

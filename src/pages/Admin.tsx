@@ -4,7 +4,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { LogOut, Settings, FileText, Calendar, Users, Image, BookOpen, Newspaper } from "lucide-react";
+import { LogOut, Settings, FileText, Calendar, Users, Image, BookOpen, Newspaper, Home } from "lucide-react";
+import { Crown } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 // Componentes do painel admin (vão ser criados separadamente)
@@ -16,6 +17,8 @@ import AdminPhotos from "@/components/admin/AdminPhotos";
 import AdminClergy from "@/components/admin/AdminClergy";
 import AdminParishes from "@/components/admin/AdminParishes";
 import AdminSettings from "@/components/admin/AdminSettings";
+import AdminBishop from "@/components/admin/AdminBishop";
+import AdminCloudinary from "@/components/admin/AdminCloudinary";
 
 const AdminPage = () => {
   const [user, setUser] = useState(null);
@@ -82,6 +85,10 @@ const AdminPage = () => {
                 Bem-vindo, {user.email}
               </span>
               <Button variant="outline" onClick={handleLogout}>
+                <Home className="h-4 w-4 mr-2" />
+                Ir para o Site
+              </Button>
+              <Button variant="outline" onClick={handleLogout}>
                 <LogOut className="h-4 w-4 mr-2" />
                 Sair
               </Button>
@@ -92,7 +99,7 @@ const AdminPage = () => {
 
       <main className="container mx-auto px-4 py-8">
         <Tabs defaultValue="articles" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4 lg:grid-cols-8">
+          <TabsList className="grid w-full grid-cols-5 lg:grid-cols-10">
             <TabsTrigger value="articles" className="flex items-center gap-2">
               <FileText className="h-4 w-4" />
               <span className="hidden sm:inline">Notícias</span>
@@ -121,9 +128,17 @@ const AdminPage = () => {
               <Users className="h-4 w-4" />
               <span className="hidden sm:inline">Paróquias</span>
             </TabsTrigger>
+            <TabsTrigger value="bishop" className="flex items-center gap-2">
+              <Crown className="h-4 w-4" />
+              <span className="hidden sm:inline">Bispo</span>
+            </TabsTrigger>
             <TabsTrigger value="settings" className="flex items-center gap-2">
               <Settings className="h-4 w-4" />
               <span className="hidden sm:inline">Configurações</span>
+            </TabsTrigger>
+            <TabsTrigger value="cloudinary" className="flex items-center gap-2">
+              <Image className="h-4 w-4" />
+              <span className="hidden sm:inline">Cloudinary</span>
             </TabsTrigger>
           </TabsList>
 
@@ -155,8 +170,16 @@ const AdminPage = () => {
             <AdminParishes />
           </TabsContent>
 
+          <TabsContent value="bishop">
+            <AdminBishop />
+          </TabsContent>
+
           <TabsContent value="settings">
             <AdminSettings />
+          </TabsContent>
+
+          <TabsContent value="cloudinary">
+            <AdminCloudinary />
           </TabsContent>
         </Tabs>
       </main>

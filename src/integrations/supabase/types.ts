@@ -59,6 +59,60 @@ export type Database = {
         }
         Relationships: []
       }
+      bishop: {
+        Row: {
+          appointment_date: string | null
+          bio: string | null
+          created_at: string
+          email: string | null
+          episcopal_ordination_date: string | null
+          id: string
+          motto: string | null
+          name: string
+          ordination_date: string | null
+          pastoral_letter: string | null
+          phone: string | null
+          photo_url: string | null
+          slug: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          appointment_date?: string | null
+          bio?: string | null
+          created_at?: string
+          email?: string | null
+          episcopal_ordination_date?: string | null
+          id?: string
+          motto?: string | null
+          name: string
+          ordination_date?: string | null
+          pastoral_letter?: string | null
+          phone?: string | null
+          photo_url?: string | null
+          slug: string
+          title?: string
+          updated_at?: string
+        }
+        Update: {
+          appointment_date?: string | null
+          bio?: string | null
+          created_at?: string
+          email?: string | null
+          episcopal_ordination_date?: string | null
+          id?: string
+          motto?: string | null
+          name?: string
+          ordination_date?: string | null
+          pastoral_letter?: string | null
+          phone?: string | null
+          photo_url?: string | null
+          slug?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       clergy: {
         Row: {
           bio: string | null
@@ -117,6 +171,39 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      cloudinary_settings: {
+        Row: {
+          api_key: string
+          api_secret: string
+          cloud_name: string
+          created_at: string
+          folder_structure: string
+          id: string
+          updated_at: string
+          upload_preset: string
+        }
+        Insert: {
+          api_key: string
+          api_secret: string
+          cloud_name: string
+          created_at?: string
+          folder_structure?: string
+          id?: string
+          updated_at?: string
+          upload_preset?: string
+        }
+        Update: {
+          api_key?: string
+          api_secret?: string
+          cloud_name?: string
+          created_at?: string
+          folder_structure?: string
+          id?: string
+          updated_at?: string
+          upload_preset?: string
+        }
+        Relationships: []
       }
       events: {
         Row: {
