@@ -14,6 +14,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import { ImageUpload } from "@/components/ui/image-upload";
 import { Plus, Edit, Trash2, Eye, Calendar, FileText, Play, Volume2 } from "lucide-react";
 
 interface PastorMessage {
@@ -287,15 +288,21 @@ const AdminPastorMessages = () => {
                   )}
                 </div>
 
-                {formData.content_type !== 'texto' && (
+                {(formData.content_type === 'video' || formData.content_type === 'audio') && (
                   <div>
-                    <Label htmlFor="media_url">URL da Mídia</Label>
+                    <Label htmlFor="media_url">URL do {formData.content_type === 'video' ? 'Vídeo' : 'Áudio'}</Label>
                     <Input
                       id="media_url"
                       value={formData.media_url}
                       onChange={(e) => setFormData({...formData, media_url: e.target.value})}
-                      placeholder={`https://exemplo.com/arquivo.${formData.content_type === 'video' ? 'mp4' : 'mp3'}`}
+                      placeholder={`URL do ${formData.content_type === 'video' ? 'vídeo (YouTube, Vimeo, etc.)' : 'áudio'}`}
                     />
+                    <p className="text-xs text-muted-foreground mt-1">
+                      {formData.content_type === 'video' 
+                        ? 'Cole a URL do vídeo do YouTube, Vimeo ou outro serviço'
+                        : 'Cole a URL do arquivo de áudio hospedado'
+                      }
+                    </p>
                   </div>
                 )}
 
