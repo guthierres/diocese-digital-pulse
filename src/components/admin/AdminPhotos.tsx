@@ -292,7 +292,7 @@ const AdminPhotos = () => {
                 <div>
                   <Label>Imagens</Label>
                   <ImageUpload
-                    onUpload={(urls) => setFormData({...formData, image_urls: urls || []})}
+                    onUpload={(urls) => setFormData({...formData, image_urls: urls})}
                     multiple={!editingPhoto} // Múltiplo apenas para novas fotos
                     folder="diocese/galeria"
                     maxFiles={20}

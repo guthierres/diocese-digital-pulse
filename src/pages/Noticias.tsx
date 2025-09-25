@@ -242,6 +242,15 @@ const NoticiasPage = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <main className="container mx-auto px-4 py-8">
+        <div className="mb-6">
+          <Link to="/">
+            <Button variant="outline" className="mb-4">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Voltar ao Início
+            </Button>
+          </Link>
+        </div>
+
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-primary mb-4">Notícias</h1>
           <p className="text-muted-foreground">Acompanhe as últimas novidades da Diocese de São Miguel Paulista</p>

@@ -73,24 +73,6 @@ export const globalSearch = async (searchTerm: string): Promise<SearchResult[]> 
       })));
     }
 
-    // Buscar em jornais
-    const { data: journals } = await supabase
-      .from('journals')
-      .select('id, title, description, publication_date')
-      .or(`title.ilike.${term},description.ilike.${term}`)
-      .limit(5);
-
-    if (journals) {
-      results.push(...journals.map(journal => ({
-        id: journal.id,
-        title: journal.title,
-        type: 'Jornal',
-        url: `/jornal`,
-        description: journal.description,
-        date: journal.publication_date
-      })));
-    }
-
     // Buscar no clero
     const { data: clergy } = await supabase
       .from('clergy')

@@ -384,7 +384,7 @@ const AdminParishes = () => {
                 <div>
                   <Label htmlFor="image_url">Imagem da Paróquia</Label>
                   <ImageUpload
-                    onUpload={(urls) => setFormData({...formData, image_url: urls[0] || ''})}
+                    onUpload={(urls) => setFormData({...formData, image_url: urls[0]})}
                     multiple={false}
                     folder="diocese/paroquias"
                   />

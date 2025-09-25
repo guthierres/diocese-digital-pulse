@@ -12,7 +12,6 @@ import { useToast } from "@/hooks/use-toast";
 import AdminArticles from "@/components/admin/AdminArticles";
 import AdminEvents from "@/components/admin/AdminEvents";
 import AdminPastorMessages from "@/components/admin/AdminPastorMessages";
-import AdminJournals from "@/components/admin/AdminJournals";
 import AdminPhotos from "@/components/admin/AdminPhotos";
 import AdminClergy from "@/components/admin/AdminClergy";
 import AdminParishes from "@/components/admin/AdminParishes";
@@ -84,11 +83,14 @@ const AdminPage = () => {
               <span className="text-sm text-muted-foreground">
                 Bem-vindo, {user.email}
               </span>
-              <Button variant="outline" onClick={handleLogout}>
-                <Home className="h-4 w-4 mr-2" />
-                Ir para o Site
+              <Button variant="outline" asChild>
+                <a href="/" target="_blank">
+                  <Home className="h-4 w-4 mr-2" />
+                  Ir para o Site
+                </a>
               </Button>
               <Button variant="outline" onClick={handleLogout}>
+                <Home className="h-4 w-4 mr-2" />
                 <LogOut className="h-4 w-4 mr-2" />
                 Sair
               </Button>
@@ -99,7 +101,7 @@ const AdminPage = () => {
 
       <main className="container mx-auto px-4 py-8">
         <Tabs defaultValue="articles" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-5 lg:grid-cols-10">
+          <TabsList className="grid w-full grid-cols-5 lg:grid-cols-9">
             <TabsTrigger value="articles" className="flex items-center gap-2">
               <FileText className="h-4 w-4" />
               <span className="hidden sm:inline">Notícias</span>
@@ -111,10 +113,6 @@ const AdminPage = () => {
             <TabsTrigger value="messages" className="flex items-center gap-2">
               <BookOpen className="h-4 w-4" />
               <span className="hidden sm:inline">Mensagens</span>
-            </TabsTrigger>
-            <TabsTrigger value="journals" className="flex items-center gap-2">
-              <Newspaper className="h-4 w-4" />
-              <span className="hidden sm:inline">Jornal</span>
             </TabsTrigger>
             <TabsTrigger value="photos" className="flex items-center gap-2">
               <Image className="h-4 w-4" />
@@ -154,9 +152,6 @@ const AdminPage = () => {
             <AdminPastorMessages />
           </TabsContent>
 
-          <TabsContent value="journals">
-            <AdminJournals />
-          </TabsContent>
 
           <TabsContent value="photos">
             <AdminPhotos />

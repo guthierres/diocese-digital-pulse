@@ -43,7 +43,7 @@ const AdminArticles = () => {
     content: '',
     excerpt: '',
     author: 'Diocese de São Miguel Paulista',
-    featured_image: '',
+    featured_image_url: '',
     gallery_images: [] as string[],
     is_featured: false,
     tags: '',
@@ -94,7 +94,6 @@ const AdminArticles = () => {
       const articleData = {
         ...formData,
         slug: formData.slug || generateSlug(formData.title),
-        featured_image_url: formData.featured_image,
         tags: formData.tags ? formData.tags.split(',').map(tag => tag.trim()) : null,
         gallery_images: formData.gallery_images.length > 0 ? formData.gallery_images : null,
         published_at: formData.published_at || null
@@ -146,7 +145,7 @@ const AdminArticles = () => {
       content: article.content,
       excerpt: article.excerpt,
       author: article.author,
-      featured_image: article.featured_image_url || '',
+      featured_image_url: article.featured_image_url || '',
       gallery_images: article.gallery_images || [],
       is_featured: article.is_featured,
       tags: article.tags?.join(', ') || '',
@@ -187,7 +186,7 @@ const AdminArticles = () => {
       content: '',
       excerpt: '',
       author: 'Diocese de São Miguel Paulista',
-      featured_image: '',
+      featured_image_url: '',
       gallery_images: [],
       is_featured: false,
       tags: '',
@@ -283,14 +282,14 @@ const AdminArticles = () => {
                 <div>
                   <Label>Imagem Principal</Label>
                   <ImageUpload
-                    onUpload={(urls) => setFormData({...formData, featured_image: urls[0] || ''})}
+                    onUpload={(urls) => setFormData({...formData, featured_image_url: urls[0] || ''})}
                     multiple={false}
                     folder="diocese/noticias"
                   />
-                  {formData.featured_image && (
+                  {formData.featured_image_url && (
                     <div className="mt-2">
                       <img
-                        src={formData.featured_image}
+                        src={formData.featured_image_url}
                         alt="Preview"
                         className="w-full h-32 object-cover rounded-lg"
                       />
@@ -301,7 +300,7 @@ const AdminArticles = () => {
                 <div>
                   <Label>Galeria de Imagens (Opcional)</Label>
                   <ImageUpload
-                    onUpload={(urls) => setFormData({...formData, gallery_images: urls || []})}
+                    onUpload={(urls) => setFormData({...formData, gallery_images: urls})}
                     multiple={true}
                     folder="diocese/galerias"
                     maxFiles={10}

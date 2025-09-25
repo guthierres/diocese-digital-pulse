@@ -1,13 +1,16 @@
 import { useParams, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Mail, MapPin, Phone, Heart, Target, Users, Shield, FileText, CreditCard } from "lucide-react";
+import { Mail, MapPin, Phone, Heart, Target, Users, Shield, FileText, CreditCard, ArrowLeft } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const InstitucionalPage = () => {
   const { page } = useParams();
   const location = useLocation();
+  const { toast } = useToast();
   
   // Determinar a página baseada na URL
   const currentPage = page || location.pathname.replace('/', '');
@@ -17,6 +20,15 @@ const InstitucionalPage = () => {
       case 'sobre':
         return (
           <div className="max-w-4xl mx-auto">
+            <div className="mb-6">
+              <Link to="/">
+                <Button variant="outline" className="mb-4">
+                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  Voltar ao Início
+                </Button>
+              </Link>
+            </div>
+
             <div className="mb-8">
               <h1 className="text-4xl font-bold text-primary mb-4">Sobre a Diocese</h1>
               <p className="text-lg text-muted-foreground">
@@ -83,6 +95,15 @@ const InstitucionalPage = () => {
       case 'missao':
         return (
           <div className="max-w-4xl mx-auto">
+            <div className="mb-6">
+              <Link to="/">
+                <Button variant="outline" className="mb-4">
+                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  Voltar ao Início
+                </Button>
+              </Link>
+            </div>
+
             <div className="mb-8">
               <h1 className="text-4xl font-bold text-primary mb-4">Missão e Visão</h1>
               <p className="text-lg text-muted-foreground">
@@ -196,6 +217,15 @@ const InstitucionalPage = () => {
       case 'contato':
         return (
           <div className="max-w-4xl mx-auto">
+            <div className="mb-6">
+              <Link to="/">
+                <Button variant="outline" className="mb-4">
+                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  Voltar ao Início
+                </Button>
+              </Link>
+            </div>
+
             <div className="mb-8">
               <h1 className="text-4xl font-bold text-primary mb-4">Contato</h1>
               <p className="text-lg text-muted-foreground">
@@ -278,6 +308,15 @@ const InstitucionalPage = () => {
       case 'doacoes':
         return (
           <div className="max-w-4xl mx-auto">
+            <div className="mb-6">
+              <Link to="/">
+                <Button variant="outline" className="mb-4">
+                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  Voltar ao Início
+                </Button>
+              </Link>
+            </div>
+
             <div className="mb-8">
               <h1 className="text-4xl font-bold text-primary mb-4">Doações</h1>
               <p className="text-lg text-muted-foreground">
@@ -348,6 +387,39 @@ const InstitucionalPage = () => {
                       <strong>PIX:</strong> doacoes@diocesesaomiguel.org.br
                     </p>
                   </div>
+                  
+                  <div className="mt-6 p-6 border-2 border-accent/30 rounded-lg bg-accent/5">
+                    <h4 className="font-semibold mb-3 text-accent">Código PIX Copia e Cola</h4>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      Use este código no seu aplicativo bancário para fazer uma doação via PIX:
+                    </p>
+                    <div className="bg-muted rounded-lg p-4 mb-4">
+                      <code className="text-xs break-all font-mono">
+                        00020126530014BR.GOV.BCB.PIX0131doacoes@diocesesaomiguel.org.br5204000053039865802BR5924MITRA DIOCESANA S.MIGUEL6009Sao Paulo62160512MITRASMPDOAC63046B22
+                      </code>
+                    </div>
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      <Button 
+                        variant="accent" 
+                        onClick={() => {
+                          navigator.clipboard.writeText('00020126530014BR.GOV.BCB.PIX0131doacoes@diocesesaomiguel.org.br5204000053039865802BR5924MITRA DIOCESANA S.MIGUEL6009Sao Paulo62160512MITRASMPDOAC63046B22');
+                          toast({
+                            title: "Código PIX copiado!",
+                            description: "Cole no seu aplicativo bancário para fazer a doação.",
+                          });
+                        }}
+                        className="flex-1"
+                      >
+                        Copiar Código PIX
+                      </Button>
+                    </div>
+                    <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                      <p className="text-sm text-blue-800">
+                        <strong>Como usar:</strong> Abra seu aplicativo bancário, vá em PIX → Copia e Cola, 
+                        cole o código copiado e confirme a doação.
+                      </p>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
 
@@ -385,6 +457,15 @@ const InstitucionalPage = () => {
       case 'politica-privacidade':
         return (
           <div className="max-w-4xl mx-auto">
+            <div className="mb-6">
+              <Link to="/">
+                <Button variant="outline" className="mb-4">
+                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  Voltar ao Início
+                </Button>
+              </Link>
+            </div>
+
             <div className="mb-8">
               <h1 className="text-4xl font-bold text-primary mb-4">Política de Privacidade</h1>
               <p className="text-lg text-muted-foreground">
@@ -455,6 +536,15 @@ const InstitucionalPage = () => {
       case 'termos':
         return (
           <div className="max-w-4xl mx-auto">
+            <div className="mb-6">
+              <Link to="/">
+                <Button variant="outline" className="mb-4">
+                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  Voltar ao Início
+                </Button>
+              </Link>
+            </div>
+
             <div className="mb-8">
               <h1 className="text-4xl font-bold text-primary mb-4">Termos de Uso</h1>
               <p className="text-lg text-muted-foreground">
@@ -524,13 +614,19 @@ const InstitucionalPage = () => {
       default:
         return (
           <div className="max-w-4xl mx-auto text-center py-12">
+            <div className="mb-6">
+              <Link to="/">
+                <Button variant="outline" className="mb-4">
+                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  Voltar ao Início
+                </Button>
+              </Link>
+            </div>
+
             <h1 className="text-4xl font-bold text-primary mb-4">Página não encontrada</h1>
             <p className="text-muted-foreground mb-6">
               A página institucional que você está procurando não existe.
             </p>
-            <Button asChild>
-              <a href="/">Voltar ao Início</a>
-            </Button>
           </div>
         );
     }

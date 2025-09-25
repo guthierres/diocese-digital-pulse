@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { RichTextEditor } from "@/components/ui/rich-text-editor";
 import { Label } from "@/components/ui/label";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { ImageUpload } from "@/components/ui/image-upload";
+import { ImageUpload } from "@/components/ui/image-upload"; // Apenas uma importação
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { format } from "date-fns";
@@ -252,7 +252,7 @@ const AdminBishop = () => {
             <div className="mt-4">
               <Label>Foto Oficial</Label>
               <ImageUpload
-                onUpload={(urls) => setFormData({...formData, photo: urls[0] || ''})}
+                onUpload={(urls) => setFormData({...formData, photo: urls[0]})}
                 multiple={false}
                 folder="diocese/bispo"
               />

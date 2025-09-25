@@ -8,7 +8,6 @@ import NotFound from "./pages/NotFound";
 import Noticias from "./pages/Noticias";
 import Eventos from "./pages/Eventos";
 import MensagensPastor from "./pages/MensagensPastor";
-import Jornal from "./pages/Jornal";
 import Galeria from "./pages/Galeria";
 import DiretorioClero from "./pages/DiretorioClero";
 import DiretorioParoquias from "./pages/DiretorioParoquias";
@@ -33,7 +32,6 @@ const App = () => (
           <Route path="/eventos/:slug" element={<Eventos />} />
           <Route path="/mensagens-do-pastor" element={<MensagensPastor />} />
           <Route path="/mensagens-do-pastor/:slug" element={<MensagensPastor />} />
-          <Route path="/jornal" element={<Jornal />} />
           <Route path="/galeria" element={<Galeria />} />
           <Route path="/diretorio/clero" element={<DiretorioClero />} />
           <Route path="/diretorio/clero/:slug" element={<DiretorioClero />} />

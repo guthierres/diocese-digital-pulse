@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Search, Loader2 } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Command, CommandEmpty, CommandGroup, CommandItem, CommandList } from "@/components/ui/command";
+import { Command, CommandEmpty, CommandGroup, CommandItem, CommandList, CommandInput } from "@/components/ui/command";
 import { Badge } from "@/components/ui/badge";
 import { globalSearch, SearchResult } from "@/integrations/supabase/search";
 import { format } from "date-fns";
@@ -51,19 +51,19 @@ const GlobalSearch = ({ className, placeholder = "Buscar..." }: GlobalSearchProp
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <div className={`relative ${className}`}>
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input
-            placeholder={placeholder}
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            onFocus={() => setOpen(true)}
-            className="pl-10 pr-4"
-          />
-        </div>
+        <Button variant="outline" className={`justify-start text-left font-normal ${className}`}>
+          <Search className="mr-2 h-4 w-4" />
+          <span className="text-muted-foreground">{placeholder}</span>
+        </Button>
       </PopoverTrigger>
       <PopoverContent className="w-80 p-0" align="start">
         <Command>
+          <CommandInput 
+            placeholder={placeholder}
+            value={searchTerm}
+            onValueChange={setSearchTerm}
+            autoFocus
+          />
           <CommandList>
             {loading && (
               <div className="flex items-center justify-center py-6">

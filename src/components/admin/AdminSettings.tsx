@@ -191,7 +191,7 @@ const AdminSettings = () => {
             <div className="mt-4">
               <Label htmlFor="logo_url">Logo do Site</Label>
               <ImageUpload
-                onUpload={(urls) => setFormData({...formData, logo_url: urls[0] || ''})}
+                onUpload={(urls) => setFormData({...formData, logo_url: urls[0]})}
                 multiple={false}
                 folder="diocese/logo"
                 className="mt-2"

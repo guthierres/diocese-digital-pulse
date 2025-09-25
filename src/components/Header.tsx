@@ -6,9 +6,17 @@ import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import GlobalSearch from "@/components/GlobalSearch";
 
+interface SiteSettings {
+  site_name: string;
+  site_title: string;
+  logo_url?: string;
+}
+
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [siteSettings, setSiteSettings] = useState<SiteSettings | null>(null);
+  const [loading, setLoading] = useState(true);
 
   const navigationItems = [
     { name: "Início", href: "/" },
@@ -25,19 +33,20 @@ const Header = () => {
     },
   ];
 
-  const [siteLogoUrl, setSiteLogoUrl] = useState<string | null>(null);
-
   useEffect(() => {
     const fetchSiteSettings = async () => {
       try {
         const { data, error } = await supabase
           .from('site_settings')
-          .select('logo_url')
+          .select('site_name, site_title, logo_url')
           .single();
+        
         if (error) throw error;
-        setSiteLogoUrl(data?.logo_url || null);
+        setSiteSettings(data);
       } catch (error) {
         console.error("Erro ao carregar configurações do site:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -51,8 +60,8 @@ const Header = () => {
           {/* Logo */}
           <div className="flex items-center">
             <Link to="/">
-              {siteLogoUrl ? (
-                <img src={siteLogoUrl} alt="Logo da Diocese" className="h-12 w-12 object-contain mr-3" />
+              {siteSettings?.logo_url ? (
+                <img src={siteSettings.logo_url} alt="Logo da Diocese" className="h-12 w-12 object-contain mr-3" />
               ) : (
                 <div className="h-12 w-12 bg-primary rounded-full flex items-center justify-center mr-3">
                   <span className="text-primary-foreground font-bold text-lg">D</span>
@@ -60,8 +69,12 @@ const Header = () => {
               )}
             </Link>
             <div>
-              <h1 className="text-xl font-bold text-primary">Diocese de São Miguel Paulista</h1>
-              <p className="text-xs text-muted-foreground">Arquidiocese de São Paulo</p>
+              <h1 className="text-xl font-bold text-primary">
+                {siteSettings?.site_name || "Diocese de São Miguel Paulista"}
+              </h1>
+              <p className="text-xs text-muted-foreground">
+                {siteSettings?.site_title || "Defendei-nos no combate"}
+              </p>
             </div>
           </div>
 
