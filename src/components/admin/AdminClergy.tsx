@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
@@ -29,6 +30,8 @@ interface ClergyMember {
   email?: string;
   bio?: string;
   created_at: string;
+  is_government?: boolean;
+  government_order?: number;
   parishes?: {
     name: string;
   };
@@ -189,7 +192,9 @@ const AdminClergy = () => {
       photo_url: member.photo_url || '',
       phone: member.phone || '',
       email: member.email || '',
-      bio: member.bio || ''
+      bio: member.bio || '',
+      is_government: member.is_government || false,
+      government_order: member.government_order ? member.government_order.toString() : ''
     });
     setIsDialogOpen(true);
   };
@@ -231,7 +236,9 @@ const AdminClergy = () => {
       photo_url: '',
       phone: '',
       email: '',
-      bio: ''
+      bio: '',
+      is_government: false,
+      government_order: ''
     });
     setEditingMember(null);
   };
@@ -346,6 +353,32 @@ const AdminClergy = () => {
                     onChange={(e) => setFormData({...formData, motto: e.target.value})}
                     placeholder="Lema pessoal ou frase inspiradora"
                   />
+                </div>
+
+                <div className="space-y-4">
+                  <div className="flex items-center space-x-2">
+                    <Switch
+                      id="is_government"
+                      checked={formData.is_government}
+                      onCheckedChange={(checked) => setFormData({...formData, is_government: checked})}
+                    />
+                    <Label htmlFor="is_government">Membro do Governo Diocesano</Label>
+                  </div>
+
+                  {formData.is_government && (
+                    <div>
+                      <Label htmlFor="government_order">Ordem no Governo (1-10)</Label>
+                      <Input
+                        id="government_order"
+                        type="number"
+                        min="1"
+                        max="10"
+                        value={formData.government_order}
+                        onChange={(e) => setFormData({...formData, government_order: e.target.value})}
+                        placeholder="Posição na hierarquia (1 = mais alto)"
+                      />
+                    </div>
+                  )}
                 </div>
 
                 <div className="grid grid-cols-3 gap-4">
