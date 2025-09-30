@@ -1,7 +1,42 @@
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { supabase } from "@/integrations/supabase/client";
 import heroImage from "@/assets/hero-diocese.jpg";
 
 const Hero = () => {
+  const [stats, setStats] = useState({
+    parishes: 25,
+    priests: 50,
+    faithful: "1M+",
+    years: 45
+  });
+
+  useEffect(() => {
+    fetchStats();
+  }, []);
+
+  const fetchStats = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('site_settings')
+        .select('parishes_count, priests_count, faithful_count, years_count')
+        .single();
+      
+      if (error) throw error;
+      
+      if (data) {
+        setStats({
+          parishes: data.parishes_count || 25,
+          priests: data.priests_count || 50,
+          faithful: data.faithful_count || "1M+",
+          years: data.years_count || 45
+        });
+      }
+    } catch (error) {
+      console.error("Erro ao carregar estatísticas:", error);
+    }
+  };
+
   return (
     <section className="relative min-h-[80vh] flex items-center justify-center bg-primary-dark overflow-hidden">
       {/* Background Image with Overlay */}
@@ -14,10 +49,10 @@ const Hero = () => {
 
       {/* Content */}
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 className="text-4xl md:text-6xl font-bold text-primary-foreground mb-6 leading-tight">
+        <h1 className="text-4xl md:text-6xl font-bold text-primary-foreground mb-6 leading-tight" style={{ textShadow: '2px 2px 8px rgba(0, 0, 0, 0.5)' }}>
           Diocese de São Miguel Paulista
         </h1>
-        <p className="text-xl md:text-2xl text-primary-foreground/90 mb-8 max-w-3xl mx-auto">
+        <p className="text-xl md:text-2xl text-primary-foreground mb-8 max-w-3xl mx-auto" style={{ textShadow: '1px 1px 4px rgba(0, 0, 0, 0.4)' }}>
           Caminhando juntos na fé, construindo uma comunidade de amor e esperança 
           no coração da zona leste de São Paulo.
         </p>
@@ -38,20 +73,20 @@ const Hero = () => {
         {/* Statistics */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 pt-8 border-t border-primary-foreground/20">
           <div className="text-center">
-            <div className="text-3xl md:text-4xl font-bold text-accent">25+</div>
-            <div className="text-primary-foreground/80 text-sm md:text-base">Paróquias</div>
+            <div className="text-3xl md:text-4xl font-bold text-accent" style={{ textShadow: '1px 1px 4px rgba(0, 0, 0, 0.5)' }}>{stats.parishes}+</div>
+            <div className="text-primary-foreground text-sm md:text-base font-medium" style={{ textShadow: '1px 1px 3px rgba(0, 0, 0, 0.5)' }}>Paróquias</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl md:text-4xl font-bold text-accent">50+</div>
-            <div className="text-primary-foreground/80 text-sm md:text-base">Padres</div>
+            <div className="text-3xl md:text-4xl font-bold text-accent" style={{ textShadow: '1px 1px 4px rgba(0, 0, 0, 0.5)' }}>{stats.priests}+</div>
+            <div className="text-primary-foreground text-sm md:text-base font-medium" style={{ textShadow: '1px 1px 3px rgba(0, 0, 0, 0.5)' }}>Padres</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl md:text-4xl font-bold text-accent">1M+</div>
-            <div className="text-primary-foreground/80 text-sm md:text-base">Fiéis</div>
+            <div className="text-3xl md:text-4xl font-bold text-accent" style={{ textShadow: '1px 1px 4px rgba(0, 0, 0, 0.5)' }}>{stats.faithful}</div>
+            <div className="text-primary-foreground text-sm md:text-base font-medium" style={{ textShadow: '1px 1px 3px rgba(0, 0, 0, 0.5)' }}>Fiéis</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl md:text-4xl font-bold text-accent">45</div>
-            <div className="text-primary-foreground/80 text-sm md:text-base">Anos</div>
+            <div className="text-3xl md:text-4xl font-bold text-accent" style={{ textShadow: '1px 1px 4px rgba(0, 0, 0, 0.5)' }}>{stats.years}</div>
+            <div className="text-primary-foreground text-sm md:text-base font-medium" style={{ textShadow: '1px 1px 3px rgba(0, 0, 0, 0.5)' }}>Anos</div>
           </div>
         </div>
       </div>

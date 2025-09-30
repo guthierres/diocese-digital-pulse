@@ -21,6 +21,7 @@ export type Database = {
           created_at: string
           excerpt: string | null
           featured_image_url: string | null
+          gallery_images: string[] | null
           id: string
           is_featured: boolean | null
           published_at: string | null
@@ -35,6 +36,7 @@ export type Database = {
           created_at?: string
           excerpt?: string | null
           featured_image_url?: string | null
+          gallery_images?: string[] | null
           id?: string
           is_featured?: boolean | null
           published_at?: string | null
@@ -49,6 +51,7 @@ export type Database = {
           created_at?: string
           excerpt?: string | null
           featured_image_url?: string | null
+          gallery_images?: string[] | null
           id?: string
           is_featured?: boolean | null
           published_at?: string | null
@@ -63,7 +66,7 @@ export type Database = {
         Row: {
           appointment_date: string | null
           bio: string | null
-          created_at: string
+          created_at: string | null
           email: string | null
           episcopal_ordination_date: string | null
           id: string
@@ -75,12 +78,12 @@ export type Database = {
           photo_url: string | null
           slug: string
           title: string
-          updated_at: string
+          updated_at: string | null
         }
         Insert: {
           appointment_date?: string | null
           bio?: string | null
-          created_at?: string
+          created_at?: string | null
           email?: string | null
           episcopal_ordination_date?: string | null
           id?: string
@@ -92,12 +95,12 @@ export type Database = {
           photo_url?: string | null
           slug: string
           title?: string
-          updated_at?: string
+          updated_at?: string | null
         }
         Update: {
           appointment_date?: string | null
           bio?: string | null
-          created_at?: string
+          created_at?: string | null
           email?: string | null
           episcopal_ordination_date?: string | null
           id?: string
@@ -109,7 +112,7 @@ export type Database = {
           photo_url?: string | null
           slug?: string
           title?: string
-          updated_at?: string
+          updated_at?: string | null
         }
         Relationships: []
       }
@@ -118,7 +121,9 @@ export type Database = {
           bio: string | null
           created_at: string
           email: string | null
+          government_order: number | null
           id: string
+          is_government: boolean | null
           motto: string | null
           name: string
           ordination_date: string | null
@@ -134,7 +139,9 @@ export type Database = {
           bio?: string | null
           created_at?: string
           email?: string | null
+          government_order?: number | null
           id?: string
+          is_government?: boolean | null
           motto?: string | null
           name: string
           ordination_date?: string | null
@@ -179,30 +186,30 @@ export type Database = {
           api_key: string
           api_secret: string
           cloud_name: string
-          created_at: string
+          created_at: string | null
           folder_structure: string
           id: string
-          updated_at: string
+          updated_at: string | null
           upload_preset: string
         }
         Insert: {
           api_key: string
           api_secret: string
           cloud_name: string
-          created_at?: string
+          created_at?: string | null
           folder_structure?: string
           id?: string
-          updated_at?: string
+          updated_at?: string | null
           upload_preset?: string
         }
         Update: {
           api_key?: string
           api_secret?: string
           cloud_name?: string
-          created_at?: string
+          created_at?: string | null
           folder_structure?: string
           id?: string
-          updated_at?: string
+          updated_at?: string | null
           upload_preset?: string
         }
         Relationships: []
@@ -447,39 +454,51 @@ export type Database = {
           created_at: string
           email_contact: string | null
           facebook_url: string | null
+          faithful_count: string | null
           id: string
           instagram_url: string | null
           logo_url: string | null
           meta_description: string | null
+          parishes_count: number | null
+          priests_count: number | null
           site_name: string
           site_title: string
           updated_at: string
+          years_count: number | null
           youtube_url: string | null
         }
         Insert: {
           created_at?: string
           email_contact?: string | null
           facebook_url?: string | null
+          faithful_count?: string | null
           id?: string
           instagram_url?: string | null
           logo_url?: string | null
           meta_description?: string | null
+          parishes_count?: number | null
+          priests_count?: number | null
           site_name?: string
           site_title?: string
           updated_at?: string
+          years_count?: number | null
           youtube_url?: string | null
         }
         Update: {
           created_at?: string
           email_contact?: string | null
           facebook_url?: string | null
+          faithful_count?: string | null
           id?: string
           instagram_url?: string | null
           logo_url?: string | null
           meta_description?: string | null
+          parishes_count?: number | null
+          priests_count?: number | null
           site_name?: string
           site_title?: string
           updated_at?: string
+          years_count?: number | null
           youtube_url?: string | null
         }
         Relationships: []

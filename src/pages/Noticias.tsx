@@ -23,7 +23,6 @@ interface Article {
   tags: string[];
   published_at: string;
   gallery_images?: string[];
-  gallery_images?: string[];
 }
 
 const NoticiasPage = () => {

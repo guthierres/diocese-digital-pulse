@@ -35,14 +35,24 @@ const AdminEvents = () => {
   const [loading, setLoading] = useState(true);
   const [editingEvent, setEditingEvent] = useState<Event | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{
+    title: string;
+    slug: string;
+    description: string;
+    event_date: string;
+    end_date: string;
+    location: string;
+    status: 'confirmado' | 'cancelado' | 'adiado';
+    featured_image_url: string;
+    is_featured: boolean;
+  }>({
     title: '',
     slug: '',
     description: '',
     event_date: '',
     end_date: '',
     location: '',
-    status: 'confirmado' as const,
+    status: 'confirmado',
     featured_image_url: '',
     is_featured: false
   });
@@ -141,7 +151,7 @@ const AdminEvents = () => {
       event_date: format(new Date(event.event_date), "yyyy-MM-dd'T'HH:mm"),
       end_date: event.end_date ? format(new Date(event.end_date), "yyyy-MM-dd'T'HH:mm") : '',
       location: event.location,
-      status: event.status,
+      status: event.status as 'confirmado' | 'cancelado' | 'adiado',
       featured_image_url: event.featured_image_url || '',
       is_featured: event.is_featured
     });

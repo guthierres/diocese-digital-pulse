@@ -20,6 +20,10 @@ interface SiteSettings {
   facebook_url?: string;
   instagram_url?: string;
   youtube_url?: string;
+  parishes_count?: number;
+  priests_count?: number;
+  faithful_count?: string;
+  years_count?: number;
 }
 
 const AdminSettings = () => {
@@ -34,7 +38,11 @@ const AdminSettings = () => {
     email_contact: '',
     facebook_url: '',
     instagram_url: '',
-    youtube_url: ''
+    youtube_url: '',
+    parishes_count: 25,
+    priests_count: 50,
+    faithful_count: '1M+',
+    years_count: 45
   });
   const { toast } = useToast();
 
@@ -64,7 +72,11 @@ const AdminSettings = () => {
           email_contact: data.email_contact || '',
           facebook_url: data.facebook_url || '',
           instagram_url: data.instagram_url || '',
-          youtube_url: data.youtube_url || ''
+          youtube_url: data.youtube_url || '',
+          parishes_count: data.parishes_count || 25,
+          priests_count: data.priests_count || 50,
+          faithful_count: data.faithful_count || '1M+',
+          years_count: data.years_count || 45
         });
       }
     } catch (error) {
@@ -92,7 +104,11 @@ const AdminSettings = () => {
         email_contact: formData.email_contact || null,
         facebook_url: formData.facebook_url || null,
         instagram_url: formData.instagram_url || null,
-        youtube_url: formData.youtube_url || null
+        youtube_url: formData.youtube_url || null,
+        parishes_count: formData.parishes_count,
+        priests_count: formData.priests_count,
+        faithful_count: formData.faithful_count,
+        years_count: formData.years_count
       };
 
       if (settings) {
@@ -266,6 +282,56 @@ const AdminSettings = () => {
                     placeholder="https://youtube.com/@diocesesaomiguel"
                   />
                 </div>
+              </div>
+            </div>
+          </div>
+
+          <Separator />
+
+          {/* Estatísticas da Página Inicial */}
+          <div>
+            <h3 className="text-lg font-medium mb-4">Estatísticas da Página Inicial</h3>
+            <p className="text-sm text-muted-foreground mb-4">Configure os números que aparecem no banner da página inicial</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="parishes_count">Número de Paróquias</Label>
+                <Input
+                  id="parishes_count"
+                  type="number"
+                  value={formData.parishes_count}
+                  onChange={(e) => setFormData({...formData, parishes_count: parseInt(e.target.value) || 0})}
+                  min="0"
+                />
+              </div>
+              <div>
+                <Label htmlFor="priests_count">Número de Padres</Label>
+                <Input
+                  id="priests_count"
+                  type="number"
+                  value={formData.priests_count}
+                  onChange={(e) => setFormData({...formData, priests_count: parseInt(e.target.value) || 0})}
+                  min="0"
+                />
+              </div>
+              <div>
+                <Label htmlFor="faithful_count">Número de Fiéis</Label>
+                <Input
+                  id="faithful_count"
+                  value={formData.faithful_count}
+                  onChange={(e) => setFormData({...formData, faithful_count: e.target.value})}
+                  placeholder="Ex: 1M+, 500K+"
+                />
+                <p className="text-xs text-muted-foreground mt-1">Pode usar formato abreviado (1M+, 500K+, etc.)</p>
+              </div>
+              <div>
+                <Label htmlFor="years_count">Anos de Fundação</Label>
+                <Input
+                  id="years_count"
+                  type="number"
+                  value={formData.years_count}
+                  onChange={(e) => setFormData({...formData, years_count: parseInt(e.target.value) || 0})}
+                  min="0"
+                />
               </div>
             </div>
           </div>

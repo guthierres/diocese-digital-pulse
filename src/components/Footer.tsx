@@ -6,6 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 
 interface SiteSettings {
   site_name: string;
+  logo_url?: string;
   email_contact?: string;
   facebook_url?: string;
   instagram_url?: string;
@@ -39,9 +40,9 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer Content */}
         <div className="py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
             {/* Diocese Info */}
-            <div className="lg:col-span-2">
+            <div>
               <div className="flex items-center mb-6">
                 {siteSettings?.logo_url ? (
                   <img src={siteSettings.logo_url} alt="Logo da Diocese" className="h-12 w-12 object-contain mr-3" />
@@ -57,30 +58,29 @@ const Footer = () => {
                   <p className="text-primary-foreground/80 text-sm">Defendei-nos no combate</p>
                 </div>
               </div>
-              <p className="text-primary-foreground/90 mb-6 max-w-md">
-                Servindo à comunidade católica da zona leste de São Paulo com fé, esperança e caridade. 
-                Construindo o Reino de Deus através da evangelização e ação social.
+              <p className="text-primary-foreground/90 mb-6">
+                Servindo à comunidade católica da zona leste de São Paulo com fé, esperança e caridade.
               </p>
               
               {/* Social Media */}
-              <div className="flex space-x-4">
+              <div className="flex space-x-3">
                 {siteSettings?.facebook_url && (
                   <Button variant="ghost" size="icon" className="text-primary-foreground hover:text-accent hover:bg-primary-light" asChild>
-                    <a href={siteSettings.facebook_url} target="_blank" rel="noopener noreferrer">
+                    <a href={siteSettings.facebook_url} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                       <Facebook className="h-5 w-5" />
                     </a>
                   </Button>
                 )}
                 {siteSettings?.instagram_url && (
                   <Button variant="ghost" size="icon" className="text-primary-foreground hover:text-accent hover:bg-primary-light" asChild>
-                    <a href={siteSettings.instagram_url} target="_blank" rel="noopener noreferrer">
+                    <a href={siteSettings.instagram_url} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                       <Instagram className="h-5 w-5" />
                     </a>
                   </Button>
                 )}
                 {siteSettings?.youtube_url && (
                   <Button variant="ghost" size="icon" className="text-primary-foreground hover:text-accent hover:bg-primary-light" asChild>
-                    <a href={siteSettings.youtube_url} target="_blank" rel="noopener noreferrer">
+                    <a href={siteSettings.youtube_url} target="_blank" rel="noopener noreferrer" aria-label="YouTube">
                       <Youtube className="h-5 w-5" />
                     </a>
                   </Button>
@@ -98,26 +98,29 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li>
+                  <Link to="/noticias" className="text-primary-foreground/80 hover:text-accent transition-smooth">
+                    Notícias
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/eventos" className="text-primary-foreground/80 hover:text-accent transition-smooth">
+                    Eventos
+                  </Link>
+                </li>
+                <li>
                   <Link to="/galeria" className="text-primary-foreground/80 hover:text-accent transition-smooth">
                     Galeria de Fotos
                   </Link>
                 </li>
                 <li>
-                  <Link to="/sobre" className="text-primary-foreground/80 hover:text-accent transition-smooth">
-                    Sobre a Diocese
+                  <Link to="/diretorio/paroquias" className="text-primary-foreground/80 hover:text-accent transition-smooth">
+                    Paróquias
                   </Link>
                 </li>
                 <li>
-                  <Link to="/missao" className="text-primary-foreground/80 hover:text-accent transition-smooth">
-                    Missão e Visão
+                  <Link to="/diretorio/clero" className="text-primary-foreground/80 hover:text-accent transition-smooth">
+                    Diretório do Clero
                   </Link>
-                </li>
-                <li>
-                  <Button variant="accent" size="sm" asChild>
-                    <Link to="/doacoes">
-                      Ofertas e Doações
-                    </Link>
-                  </Button>
                 </li>
               </ul>
             </div>
@@ -153,17 +156,22 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="border-t border-primary-light py-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-primary-foreground/80 text-sm mb-4 md:mb-0">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-primary-foreground/80 text-sm text-center md:text-left">
               © {currentYear} Diocese de São Miguel Paulista. Todos os direitos reservados.
             </p>
-            <div className="flex space-x-6 text-sm">
-              <Link to="/politica-privacidade" className="text-primary-foreground/80 hover:text-accent transition-smooth">
-                Política de Privacidade
-              </Link>
-              <Link to="/termos" className="text-primary-foreground/80 hover:text-accent transition-smooth">
-                Termos de Uso
-              </Link>
+            <div className="flex flex-col md:flex-row items-center gap-4 text-sm">
+              <div className="flex space-x-6">
+                <Link to="/politica-privacidade" className="text-primary-foreground/80 hover:text-accent transition-smooth">
+                  Política de Privacidade
+                </Link>
+                <Link to="/termos" className="text-primary-foreground/80 hover:text-accent transition-smooth">
+                  Termos de Uso
+                </Link>
+              </div>
+              <div className="text-primary-foreground/70 text-xs">
+                Dev: <a href="https://instagram.com/guthierresc" target="_blank" rel="noopener noreferrer" className="text-accent hover:text-accent-light transition-smooth">Sem. Guthierres</a>
+              </div>
             </div>
           </div>
         </div>

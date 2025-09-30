@@ -63,7 +63,6 @@ const GlobalSearch = ({ className, placeholder = "Buscar..." }: GlobalSearchProp
             value={searchTerm}
             onValueChange={setSearchTerm}
             autoFocus
-            autoFocus
           />
           <CommandList>
             {loading && (

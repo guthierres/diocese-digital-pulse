@@ -35,11 +35,20 @@ const AdminPastorMessages = () => {
   const [loading, setLoading] = useState(true);
   const [editingMessage, setEditingMessage] = useState<PastorMessage | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{
+    title: string;
+    slug: string;
+    content: string;
+    content_type: 'texto' | 'video' | 'audio';
+    media_url: string;
+    thumbnail_url: string;
+    is_featured: boolean;
+    published_at: string;
+  }>({
     title: '',
     slug: '',
     content: '',
-    content_type: 'texto' as const,
+    content_type: 'texto',
     media_url: '',
     thumbnail_url: '',
     is_featured: false,
@@ -140,7 +149,7 @@ const AdminPastorMessages = () => {
       title: message.title,
       slug: message.slug,
       content: message.content || '',
-      content_type: message.content_type,
+      content_type: message.content_type as 'texto' | 'video' | 'audio',
       media_url: message.media_url || '',
       thumbnail_url: message.thumbnail_url || '',
       is_featured: message.is_featured,
@@ -288,7 +297,7 @@ const AdminPastorMessages = () => {
                   )}
                 </div>
 
-                {(formData.content_type === 'video' || formData.content_type === 'audio') && (
+                {(formData.content_type !== 'texto') && (
                   <div>
                     <Label htmlFor="media_url">URL do {formData.content_type === 'video' ? 'Vídeo' : 'Áudio'}</Label>
                     <Input
