@@ -484,6 +484,42 @@ export type Database = {
         }
         Relationships: []
       }
+      timeline_events: {
+        Row: {
+          created_at: string
+          description: string
+          event_date: string
+          id: string
+          image_url: string | null
+          is_active: boolean | null
+          order_position: number | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          event_date: string
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          order_position?: number | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          event_date?: string
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          order_position?: number | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

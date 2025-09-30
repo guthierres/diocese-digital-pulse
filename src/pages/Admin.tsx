@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { LogOut, Settings, FileText, Calendar, Users, Image, BookOpen, Newspaper, Chrome as Home } from "lucide-react";
-import { Crown } from "lucide-react";
+import { Crown, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 // Componentes do painel admin (vão ser criados separadamente)
@@ -18,6 +18,7 @@ import AdminParishes from "@/components/admin/AdminParishes";
 import AdminSettings from "@/components/admin/AdminSettings";
 import AdminBishop from "@/components/admin/AdminBishop";
 import AdminCloudinary from "@/components/admin/AdminCloudinary";
+import AdminTimeline from "@/components/admin/AdminTimeline";
 
 const AdminPage = () => {
   const [user, setUser] = useState(null);
@@ -100,7 +101,7 @@ const AdminPage = () => {
 
       <main className="container mx-auto px-4 py-8">
         <Tabs defaultValue="articles" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-5 lg:grid-cols-9">
+          <TabsList className="grid w-full grid-cols-5 lg:grid-cols-10">
             <TabsTrigger value="articles" className="flex items-center gap-2">
               <FileText className="h-4 w-4" />
               <span className="hidden sm:inline">Notícias</span>
@@ -136,6 +137,10 @@ const AdminPage = () => {
             <TabsTrigger value="cloudinary" className="flex items-center gap-2">
               <Image className="h-4 w-4" />
               <span className="hidden sm:inline">Cloudinary</span>
+            </TabsTrigger>
+            <TabsTrigger value="timeline" className="flex items-center gap-2">
+              <Clock className="h-4 w-4" />
+              <span className="hidden sm:inline">Timeline</span>
             </TabsTrigger>
           </TabsList>
 
@@ -174,6 +179,10 @@ const AdminPage = () => {
 
           <TabsContent value="cloudinary">
             <AdminCloudinary />
+          </TabsContent>
+
+          <TabsContent value="timeline">
+            <AdminTimeline />
           </TabsContent>
         </Tabs>
       </main>
