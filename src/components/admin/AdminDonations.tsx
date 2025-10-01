@@ -62,7 +62,15 @@ const AdminDonations = () => {
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      setCampaigns(data || []);
+      
+      const campaigns = (data || []).map(campaign => ({
+        ...campaign,
+        default_amounts: Array.isArray(campaign.default_amounts) 
+          ? campaign.default_amounts as number[]
+          : []
+      }));
+      
+      setCampaigns(campaigns);
     } catch (error) {
       console.error('Erro ao carregar campanhas:', error);
       toast({

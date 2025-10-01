@@ -69,7 +69,12 @@ const Doacoes = () => {
         return;
       }
 
-      setCampaign(data);
+      setCampaign({
+        ...data,
+        default_amounts: Array.isArray(data.default_amounts) 
+          ? data.default_amounts as number[]
+          : []
+      });
     } catch (error) {
       console.error('Erro ao carregar campanha:', error);
       toast({
