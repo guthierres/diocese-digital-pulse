@@ -39,10 +39,13 @@ const Header = () => {
         const { data, error } = await supabase
           .from('site_settings')
           .select('site_name, site_title, logo_url')
-          .single();
-        
+          .order('created_at', { ascending: false })
+          .limit(1);
+
         if (error) throw error;
-        setSiteSettings(data);
+        if (data && data.length > 0) {
+          setSiteSettings(data[0]);
+        }
       } catch (error) {
         console.error("Erro ao carregar configurações do site:", error);
       } finally {

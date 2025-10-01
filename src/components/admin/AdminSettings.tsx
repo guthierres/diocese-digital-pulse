@@ -55,28 +55,28 @@ const AdminSettings = () => {
       const { data, error } = await supabase
         .from('site_settings')
         .select('*')
-        .limit(1)
-        .single();
+        .order('created_at', { ascending: false })
+        .limit(1);
 
-      if (error && error.code !== 'PGRST116') {
+      if (error) {
         throw error;
       }
 
-      if (data) {
-        setSettings(data);
+      if (data && data.length > 0) {
+        setSettings(data[0]);
         setFormData({
-          site_name: data.site_name,
-          site_title: data.site_title,
-          meta_description: data.meta_description || '',
-          logo_url: data.logo_url || '',
-          email_contact: data.email_contact || '',
-          facebook_url: data.facebook_url || '',
-          instagram_url: data.instagram_url || '',
-          youtube_url: data.youtube_url || '',
-          parishes_count: data.parishes_count || 25,
-          priests_count: data.priests_count || 50,
-          faithful_count: data.faithful_count || '1M+',
-          years_count: data.years_count || 45
+          site_name: data[0].site_name,
+          site_title: data[0].site_title,
+          meta_description: data[0].meta_description || '',
+          logo_url: data[0].logo_url || '',
+          email_contact: data[0].email_contact || '',
+          facebook_url: data[0].facebook_url || '',
+          instagram_url: data[0].instagram_url || '',
+          youtube_url: data[0].youtube_url || '',
+          parishes_count: data[0].parishes_count || 25,
+          priests_count: data[0].priests_count || 50,
+          faithful_count: data[0].faithful_count || '1M+',
+          years_count: data[0].years_count || 45
         });
       }
     } catch (error) {

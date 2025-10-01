@@ -16,6 +16,9 @@ import Bispo from "./pages/Bispo";
 import GovernoDiocese from "./pages/GovernoDiocese";
 import Admin from "./pages/Admin";
 import AdminLogin from "./pages/AdminLogin";
+import Doacoes from "./pages/Doacoes";
+import DoacoesCheckout from "./pages/DoacoesCheckout";
+import DoacoesObrigado from "./pages/DoacoesObrigado";
 
 const queryClient = new QueryClient();
 
@@ -40,11 +43,14 @@ const App = () => (
           <Route path="/diretorio/paroquias" element={<DiretorioParoquias />} />
           <Route path="/diretorio/paroquias/:slug" element={<DiretorioParoquias />} />
           <Route path="/bispo" element={<Bispo />} />
+          {/* Páginas de doação */}
+          <Route path="/doacoes/:slug" element={<Doacoes />} />
+          <Route path="/doacoes/:slug/checkout" element={<DoacoesCheckout />} />
+          <Route path="/doacoes/obrigado" element={<DoacoesObrigado />} />
           {/* Redirecionamentos para páginas institucionais */}
           <Route path="/sobre" element={<Institucional />} />
           <Route path="/missao" element={<Institucional />} />
           <Route path="/contato" element={<Institucional />} />
-          <Route path="/doacoes" element={<Institucional />} />
           <Route path="/institucional/:page" element={<Institucional />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/login" element={<AdminLogin />} />

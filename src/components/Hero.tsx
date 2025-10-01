@@ -10,30 +10,39 @@ const Hero = () => {
     faithful: "1M+",
     years: 45
   });
+  const [logoUrl, setLogoUrl] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchStats();
+    fetchSettings();
   }, []);
 
-  const fetchStats = async () => {
+  const fetchSettings = async () => {
     try {
       const { data, error } = await supabase
         .from('site_settings')
-        .select('parishes_count, priests_count, faithful_count, years_count')
-        .single();
-      
-      if (error) throw error;
-      
-      if (data) {
+        .select('parishes_count, priests_count, faithful_count, years_count, logo_url')
+        .order('created_at', { ascending: false })
+        .limit(1);
+
+      if (error) {
+        console.error("Erro ao carregar configurações:", error);
+        return;
+      }
+
+      if (data && data.length > 0) {
+        console.log("Configurações carregadas do banco:", data[0]);
         setStats({
-          parishes: data.parishes_count || 25,
-          priests: data.priests_count || 50,
-          faithful: data.faithful_count || "1M+",
-          years: data.years_count || 45
+          parishes: data[0].parishes_count || 25,
+          priests: data[0].priests_count || 50,
+          faithful: data[0].faithful_count || "1M+",
+          years: data[0].years_count || 45
         });
+        setLogoUrl(data[0].logo_url || null);
+      } else {
+        console.log("Nenhum dado encontrado no banco");
       }
     } catch (error) {
-      console.error("Erro ao carregar estatísticas:", error);
+      console.error("Erro ao carregar configurações:", error);
     }
   };
 
@@ -49,6 +58,16 @@ const Hero = () => {
 
       {/* Content */}
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        {logoUrl && (
+          <div className="flex justify-center mb-6">
+            <img
+              src={logoUrl}
+              alt="Brasão Diocese de São Miguel Paulista"
+              className="h-24 w-24 md:h-32 md:w-32 object-contain drop-shadow-2xl"
+              style={{ filter: 'drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.7))' }}
+            />
+          </div>
+        )}
         <h1 className="text-4xl md:text-6xl font-bold text-primary-foreground mb-6 leading-tight" style={{ textShadow: '2px 2px 8px rgba(0, 0, 0, 0.5)' }}>
           Diocese de São Miguel Paulista
         </h1>
