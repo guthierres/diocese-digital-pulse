@@ -214,6 +214,107 @@ export type Database = {
         }
         Relationships: []
       }
+      donation_campaigns: {
+        Row: {
+          created_at: string | null
+          current_amount: number | null
+          default_amounts: string[] | null
+          description: string | null
+          featured_image_url: string | null
+          goal_amount: number | null
+          id: string
+          is_active: boolean | null
+          min_amount: number | null
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          current_amount?: number | null
+          default_amounts?: string[] | null
+          description?: string | null
+          featured_image_url?: string | null
+          goal_amount?: number | null
+          id?: string
+          is_active?: boolean | null
+          min_amount?: number | null
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          current_amount?: number | null
+          default_amounts?: string[] | null
+          description?: string | null
+          featured_image_url?: string | null
+          goal_amount?: number | null
+          id?: string
+          is_active?: boolean | null
+          min_amount?: number | null
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      donations: {
+        Row: {
+          amount: number
+          campaign_id: string | null
+          created_at: string | null
+          donor_email: string
+          donor_name: string
+          donor_phone: string | null
+          id: string
+          is_anonymous: boolean | null
+          message: string | null
+          receipt_url: string | null
+          status: string | null
+          stripe_charge_id: string | null
+          stripe_payment_intent_id: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          amount: number
+          campaign_id?: string | null
+          created_at?: string | null
+          donor_email: string
+          donor_name: string
+          donor_phone?: string | null
+          id?: string
+          is_anonymous?: boolean | null
+          message?: string | null
+          receipt_url?: string | null
+          status?: string | null
+          stripe_charge_id?: string | null
+          stripe_payment_intent_id?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          amount?: number
+          campaign_id?: string | null
+          created_at?: string | null
+          donor_email?: string
+          donor_name?: string
+          donor_phone?: string | null
+          id?: string
+          is_anonymous?: boolean | null
+          message?: string | null
+          receipt_url?: string | null
+          status?: string | null
+          stripe_charge_id?: string | null
+          stripe_payment_intent_id?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "donations_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "donation_campaigns"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       events: {
         Row: {
           created_at: string
@@ -500,6 +601,39 @@ export type Database = {
           updated_at?: string
           years_count?: number | null
           youtube_url?: string | null
+        }
+        Relationships: []
+      }
+      stripe_settings: {
+        Row: {
+          created_at: string | null
+          id: string
+          stripe_environment: string | null
+          stripe_live_publishable_key: string | null
+          stripe_live_secret_key: string | null
+          stripe_test_publishable_key: string | null
+          stripe_test_secret_key: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          stripe_environment?: string | null
+          stripe_live_publishable_key?: string | null
+          stripe_live_secret_key?: string | null
+          stripe_test_publishable_key?: string | null
+          stripe_test_secret_key?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          stripe_environment?: string | null
+          stripe_live_publishable_key?: string | null
+          stripe_live_secret_key?: string | null
+          stripe_test_publishable_key?: string | null
+          stripe_test_secret_key?: string | null
+          updated_at?: string | null
         }
         Relationships: []
       }
