@@ -32,10 +32,19 @@ Deno.serve(async (req: Request) => {
         )
       `)
       .eq("id", donationId)
-      .single();
+      .maybeSingle();
 
-    if (error || !donation) {
+    if (error) {
+      console.error("Database error:", error);
+      throw new Error("Database error");
+    }
+
+    if (!donation) {
       throw new Error("Donation not found");
+    }
+
+    if (!donation.donation_campaigns) {
+      throw new Error("Campaign not found");
     }
 
     const receiptHTML = `
