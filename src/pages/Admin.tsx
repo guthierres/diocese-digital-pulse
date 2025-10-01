@@ -4,8 +4,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { LogOut, Settings, FileText, Calendar, Users, Image, BookOpen, Newspaper, Chrome as Home } from "lucide-react";
-import { Crown, Clock } from "lucide-react";
+import { LogOut, Settings, FileText, Calendar, Users, Image, BookOpen, Newspaper, Chrome as Home, CreditCard } from "lucide-react";
+import { Crown, Clock, Heart } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 // Componentes do painel admin (vão ser criados separadamente)
@@ -19,6 +19,8 @@ import AdminSettings from "@/components/admin/AdminSettings";
 import AdminBishop from "@/components/admin/AdminBishop";
 import AdminCloudinary from "@/components/admin/AdminCloudinary";
 import AdminTimeline from "@/components/admin/AdminTimeline";
+import AdminDonations from "@/components/admin/AdminDonations";
+import AdminStripe from "@/components/admin/AdminStripe";
 
 const AdminPage = () => {
   const [user, setUser] = useState(null);
@@ -101,7 +103,7 @@ const AdminPage = () => {
 
       <main className="container mx-auto px-4 py-8">
         <Tabs defaultValue="articles" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-5 lg:grid-cols-10">
+          <TabsList className="grid w-full grid-cols-5 lg:grid-cols-12">
             <TabsTrigger value="articles" className="flex items-center gap-2">
               <FileText className="h-4 w-4" />
               <span className="hidden sm:inline">Notícias</span>
@@ -129,6 +131,14 @@ const AdminPage = () => {
             <TabsTrigger value="bishop" className="flex items-center gap-2">
               <Crown className="h-4 w-4" />
               <span className="hidden sm:inline">Bispo</span>
+            </TabsTrigger>
+            <TabsTrigger value="donations" className="flex items-center gap-2">
+              <Heart className="h-4 w-4" />
+              <span className="hidden sm:inline">Doações</span>
+            </TabsTrigger>
+            <TabsTrigger value="stripe" className="flex items-center gap-2">
+              <CreditCard className="h-4 w-4" />
+              <span className="hidden sm:inline">Stripe</span>
             </TabsTrigger>
             <TabsTrigger value="settings" className="flex items-center gap-2">
               <Settings className="h-4 w-4" />
@@ -171,6 +181,14 @@ const AdminPage = () => {
 
           <TabsContent value="bishop">
             <AdminBishop />
+          </TabsContent>
+
+          <TabsContent value="donations">
+            <AdminDonations />
+          </TabsContent>
+
+          <TabsContent value="stripe">
+            <AdminStripe />
           </TabsContent>
 
           <TabsContent value="settings">
