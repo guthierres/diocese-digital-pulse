@@ -217,40 +217,40 @@ export type Database = {
       donation_campaigns: {
         Row: {
           created_at: string | null
-          current_amount: number | null
-          default_amounts: string[] | null
+          default_amounts: Json | null
           description: string | null
-          featured_image_url: string | null
           goal_amount: number | null
           id: string
+          image_url: string | null
           is_active: boolean | null
           min_amount: number | null
+          slug: string
           title: string
           updated_at: string | null
         }
         Insert: {
           created_at?: string | null
-          current_amount?: number | null
-          default_amounts?: string[] | null
+          default_amounts?: Json | null
           description?: string | null
-          featured_image_url?: string | null
           goal_amount?: number | null
           id?: string
+          image_url?: string | null
           is_active?: boolean | null
           min_amount?: number | null
+          slug: string
           title: string
           updated_at?: string | null
         }
         Update: {
           created_at?: string | null
-          current_amount?: number | null
-          default_amounts?: string[] | null
+          default_amounts?: Json | null
           description?: string | null
-          featured_image_url?: string | null
           goal_amount?: number | null
           id?: string
+          image_url?: string | null
           is_active?: boolean | null
           min_amount?: number | null
+          slug?: string
           title?: string
           updated_at?: string | null
         }
@@ -263,15 +263,13 @@ export type Database = {
           created_at: string | null
           donor_email: string
           donor_name: string
-          donor_phone: string | null
+          donor_phone: string
           id: string
-          is_anonymous: boolean | null
-          message: string | null
+          metadata: Json | null
           receipt_url: string | null
           status: string | null
           stripe_charge_id: string | null
           stripe_payment_intent_id: string | null
-          updated_at: string | null
         }
         Insert: {
           amount: number
@@ -279,15 +277,13 @@ export type Database = {
           created_at?: string | null
           donor_email: string
           donor_name: string
-          donor_phone?: string | null
+          donor_phone: string
           id?: string
-          is_anonymous?: boolean | null
-          message?: string | null
+          metadata?: Json | null
           receipt_url?: string | null
           status?: string | null
           stripe_charge_id?: string | null
           stripe_payment_intent_id?: string | null
-          updated_at?: string | null
         }
         Update: {
           amount?: number
@@ -295,15 +291,13 @@ export type Database = {
           created_at?: string | null
           donor_email?: string
           donor_name?: string
-          donor_phone?: string | null
+          donor_phone?: string
           id?: string
-          is_anonymous?: boolean | null
-          message?: string | null
+          metadata?: Json | null
           receipt_url?: string | null
           status?: string | null
           stripe_charge_id?: string | null
           stripe_payment_intent_id?: string | null
-          updated_at?: string | null
         }
         Relationships: [
           {
@@ -606,7 +600,6 @@ export type Database = {
       }
       stripe_settings: {
         Row: {
-          created_at: string | null
           id: string
           stripe_environment: string | null
           stripe_live_publishable_key: string | null
@@ -616,7 +609,6 @@ export type Database = {
           updated_at: string | null
         }
         Insert: {
-          created_at?: string | null
           id?: string
           stripe_environment?: string | null
           stripe_live_publishable_key?: string | null
@@ -626,7 +618,6 @@ export type Database = {
           updated_at?: string | null
         }
         Update: {
-          created_at?: string | null
           id?: string
           stripe_environment?: string | null
           stripe_live_publishable_key?: string | null
